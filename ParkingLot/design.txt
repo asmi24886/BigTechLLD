@@ -1,0 +1,101 @@
+class ParkingTicket {
+  string id
+  string carNumber
+  int spotNumber
+  int floorNumber
+  enum vehicleType
+  datetime entryTimestamp
+}
+
+class ParkingSpot {
+ int floorNumber
+ int spotNumber
+ enum vehicleType
+ boolean isFree
+}
+
+class Entrance {
+  string id
+  int position
+}
+
+class Floor: Observable {
+    string id
+    int floorNumber
+    map parkingSpots {
+        key: enum vehicleType
+        value: SortedSet<ParkingSpot>
+    }
+    int capacity
+
+    fun getFree: Set<ParkingSpot>
+    fun getOccupiedCount(): Set<ParkingSpot>
+    fun isFull(): boolean
+    fun allotSpot()
+    override fun publishChange(Event e)
+}
+
+enum EventType {
+    ALLOT, FREE
+}
+class Event {
+    EventType eventType
+    Observable source
+}
+
+interface Observable {
+    fun publishChange(Event e)
+}
+
+interface Observer {
+    fun onChange(Event e)
+}
+
+class DisplayBoard: Observer {
+    fun notifyAllotment()
+    fun notifyExit()
+    fun display()
+    override fun onChange(Event e)
+}
+
+class ParkingManager {
+    fun checkIn(enum vehicleType): ParkingTicket
+    fun generateBill(ParkingTicket ticket): ParkingBill
+    fun checkout(ParkingBill bill, PaymentStrategy paymentStrategy): boolean
+}
+
+class ParkingBill {
+    int amount
+    PaymentType paymentType
+}
+
+enum PaymentType {
+  CC, CASH, UPI
+}
+
+interface PaymentStrategy {
+    fun processPayment(int amount): boolean
+}
+
+class CashPaymentStrategy: PaymentStrategy {
+  override fun processPayment(int amount): boolean
+}
+
+class CreditCardPaymentStrategy: PaymentStrategy {
+  override fun processPayment(int amount): boolean
+}
+
+class UPIPaymentStrategy: PaymentStrategy {
+  override fun processPayment(int amount): boolean
+}
+
+class ParkingLot {
+  DisplayBoard board
+  ParkingManager parkingManager
+  SortedSet<Floor> floors
+
+  static getInstance(): ParkingLot
+
+  fun addFloor(Floor floor)
+
+}

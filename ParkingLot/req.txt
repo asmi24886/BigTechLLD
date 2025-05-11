@@ -1,0 +1,20 @@
+Requirements for the Car Parking Lot (CPL) System:
+
+Vehicle Type Support: The system should accommodate different vehicle types (initially cars and motorcycles).
+Tiered Pricing: Parking charges should be tiered based on vehicle type and parking duration (hourly rates, daily maximum, multiple-day rates, potentially an initial fixed rate).
+Multiple Levels: The parking lot has multiple floors to maximize capacity.
+Multiple Entrances: The parking lot has several entry points.
+Proximity-Based Allocation (Desired): The system should ideally allocate parking spots that are nearest to the vehicle's entry point, if possible.
+Payment on Exit: Drivers will pay for their parking upon exiting the facility.
+Multiple Payment Options: The system should support various payment methods.
+Real-time Display: Display boards at entrances and potentially on each level should show the number of occupied and available parking spots.
+Floor Capacity Management: Each floor has a maximum capacity for parking. The display boards should indicate if a floor or the entire parking lot is full.
+
+
+
+==============================================================================================
+
+- multiple entrances -> yes
+- multi level -> yes
+- parking nearest to entrance -> yes (not stritcly)
+- simple two wheeler and four wheeler parking spot
